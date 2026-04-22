@@ -1,0 +1,174 @@
+.product-image {
+    height: 700px;
+}
+
+.product-name,
+.product-price {
+    color: #282c3f !important;
+    font-size: 24px;
+    font-weight: 700;
+    padding: 0 20px 0 0;
+    letter-spacing: .3px;
+    text-transform: capitalize;
+    font-family: Assistant, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+}
+
+.product-type {
+    color: #535665 !important;
+    padding: 5px 20px 14px 0;
+    font-size: 20px;
+    opacity: .8;
+    font-weight: 400;
+    letter-spacing: .3px;
+    font-family: Assistant, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+}
+
+.rating {
+    font-size: 18px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    width: 200px;
+}
+
+.stars i {
+    color: #03a685;
+    /* Gold color */
+}
+
+.product-content {
+    color: #03a685;
+    font-weight: 700;
+    font-size: 14px;
+    display: block;
+    margin: 5px 10px 0 0;
+}
+
+.rating-num {
+    color: #282c3f;
+    font-size: 16px !important;
+}
+
+.rating-text {
+    font-size: 16px !important;
+    margin-left: 8px;
+    font-weight: 400;
+    color: #535766;
+}
+
+.size-selector {
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.size-buttons {
+    display: flex;
+    gap: 10px;
+    margin-top: 5px;
+}
+
+.size-btn {
+    width: 50px;
+    height: 50px;
+    font-size: 14px;
+    font-weight: bold;
+    border: 1px solid #bfc0c6;
+    border-radius: 50%;
+    /* Makes it circular */
+    background-color: white;
+    margin: 0;
+    font-size: 14px;
+    padding: 0 8px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+}
+
+.size-btn:hover,
+.size-btn.active {
+    background-color: #eb6864;
+    color: white;
+}
+
+.button-group {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.btn {
+    font-size: 16px;
+    font-weight: bold;
+    padding: 12px 20px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    /* Space between icon & text */
+}
+
+.btn i {
+    font-size: 18px;
+}
+
+
+/* ADD TO BAG Button */
+
+.btn-add-to-bag {
+    background-color: #ff3e6c;
+    color: white;
+    display: inline-block;
+    padding: 10px 20px !important;
+}
+
+.btn-go-to-bag {
+    background-color: #ff3e6c;
+    display: inline-block;
+    padding: 10px 20px !important;
+}
+
+.btn-add-to-bag:hover {
+    background-color: #e97d96;
+}
+
+
+/* WISHLIST Button */
+
+.btn-wishlist {
+    background-color: white;
+    color: #282c3f;
+    border: 1px solid #bfc0c6 !important;
+}
+
+.btn-wishlist:hover .fas.fa-heart,
+.btn-wishlist-select .fas.fa-heart {
+    display: inline;
+    color: #ff3e6c;
+}
+
+.btn-wishlist:hover {
+    background-color: white;
+    color: #282c3f;
+    border: 1px solid #ff3e6c !important;
+}
+
+.btn-wishlist-select {
+    background-color: white;
+    color: #282c3f;
+    border: 1px solid #ff3e6c !important;
+    cursor: none;
+    display: none;
+}
+
+.btn-wishlist:hover .fa-regular {
+    display: none;
+}
+
+.fas.fa-heart {
+    display: none;
+}

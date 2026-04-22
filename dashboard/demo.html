@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Category CRUD</title>
+    <style>
+        .category-heading {
+            color: #eb6864;
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        
+        .category-list {
+            list-style-type: none;
+            padding: 0;
+        }
+        
+        .category-list li {
+            margin-bottom: 5px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h2>Category Management</h2>
+    <div>
+        <input type="text" id="newCategory" placeholder="Enter new category">
+        <button onclick="handleAdd()">Add Category</button>
+    </div>
+
+    <div class="container">
+        <div class="row" id="categoryContainer"></div>
+    </div>
+
+    <script type="module">
+        import { getCategories, addCategory, updateCategory, deleteCategory } from './categories.js'; function renderCategories() { const container = document.getElementById("categoryContainer"); container.innerHTML = ""; const categories = getCategories(); categories.forEach(category=>
+        { const colDiv = document.createElement("div"); colDiv.classList.add("col-md-4"); colDiv.innerHTML = `
+        <div class="category-heading">${category.title}</div>
+        <ul class="category-list">
+            ${category.items.map(item => `
+            <li>${item}</li>`).join("")}
+        </ul>
+        <button onclick="handleUpdate(${category.id})">Update</button>
+        <button onclick="handleDelete(${category.id})">Delete</button> `; container.appendChild(colDiv); }); } window.handleAdd = () => { const newCategoryTitle = document.getElementById("newCategory").value; if (newCategoryTitle) { addCategory({ title:
+        newCategoryTitle, color: "#eb6864", items: [] }); document.getElementById("newCategory").value = ""; renderCategories(); } }; window.handleUpdate = (id) => { const newTitle = prompt("Enter new category name:"); if (newTitle) { updateCategory(id,
+        { title: newTitle }); renderCategories(); } }; window.handleDelete = (id) => { if (confirm("Are you sure you want to delete this category?")) { deleteCategory(id); renderCategories(); } }; document.addEventListener("DOMContentLoaded", renderCategories);
+    </script>
+
+</body>
+
+</html>
+
+
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom CSS for styling -->
+    <style>
+        .navbar-brand img {
+            height: 40px;
+        }
+        
+        .user-dropdown img {
+            height: 30px;
+            border-radius: 50%;
+        }
+        
+        .footer {
+            background-color: #f8f9fa;
+            padding: 20px 0;
+            text-align: center;
+            margin-top: 50px;
+        }
+        
+        .card {
+            transition: transform 0.3s ease-in-out;
+        }
+        
+        .card:hover {
+            transform: scale(1.05);
+        }
+        
+        .card img {
+            height: 280px;
+            object-fit: cover;
+        }
+        
+        .carousel-controls {
+            position: absolute;
+            width: 100%;
+            top: 50%;
+            display: flex;
+            justify-content: space-between;
+            transform: translateY(-50%);
+            z-index: 10;
+        }
+        
+        .carousel-control-prev-custom,
+        .carousel-control-next-custom {
+            background-color: rgba(0, 0, 0, 0.6);
+            /* Dark background */
+            color: white;
+            /* White icons */
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            cursor: pointer;
+        }
+        
+        .carousel-control-prev-custom {
+            margin-left: -70px;
+        }
+        
+        .carousel-control-next-custom {
+            margin-right: -70px;
+        }
+        
+        .carousel-control-prev-custom:hover,
+        .carousel-control-next-custom:hover {
+            background-color: rgba(0, 0, 0, 0.8);
+            /* Darker on hover */
+        }
+        
+        .img-style {
+            transition: transform 0.3s ease-in-out;
+            cursor: pointer !important;
+        }
+        
+        .img-style:hover {
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+
+<div class="container mt-5">
+    <div id="carouselExample" class="carousel slide pb-5" data-bs-ride="carousel">
+        <div id="carouselExample" class="carousel slide">
+
+
+            <div class="carousel-inner">
+                <!-- Slide 1 -->
+                <div class="carousel-item active">
+                    <div class="row">
+                        <div class="col-6 col-md-3">
+                            <img src="clothing/men/Top wear/casual shirts/shirt1.webp" class="d-block w-100 img-style" onclick="saveProductAndNavigate(31)" alt="Image 1">
+                        </div>
+                        <div class="col-6 col-md-3">
+                            <img src="clothing/men/Kurta & festive wear/sherwani/sherwani1.webp" class="d-block w-100 img-style" onclick="saveProductAndNavigate(26)" alt="Image 2">
+                        </div>
+                        <div class="col-6 col-md-3">
+                            <img src="clothing/men/Bottom wear/casual trousers/trouser1.webp" class="d-block w-100 img-style" onclick="saveProductAndNavigate(86)" alt="Image 3">
+                        </div>
+                        <div class="col-6 col-md-3">
+                            <img src="clothing/men/Top wear/sweat shirts/shirt1.webp" class="d-block w-100 img-style" onclick="saveProductAndNavigate(106)" alt="Image 4">
+                        </div>
+                    </div>
+                </div>
+                <!-- Slide 2 -->
+                <div class="carousel-item">
+                    <div class="row">
+                        <div class="col-6 col-md-3">
+                            <img src="clothing/women/indian & fusion wear/jackets/jacket1.webp" class="d-block w-100 img-style" alt="Image 1">
+                        </div>
+                        <div class="col-6 col-md-3">
+                            <img src="clothing/women/western wear/dresses/dress1.webp" class="d-block w-100 img-style" alt="Image 2">
+                        </div>
+                        <div class="col-6 col-md-3">
+                            <img src="clothing/women/indian & fusion wear/kurtas & suits/kurta1.webp" class="d-block w-100 img-style" alt="Image 3">
+                        </div>
+                        <div class="col-6 col-md-3">
+                            <img src="clothing/women/indian & fusion wear/Sarees/saree1.webp" class="d-block w-100 img-style" alt="Image 4">
+                        </div>
+                    </div>
+                </div>
+                <!-- Slide 3 -->
+                <div class="carousel-item">
+                    <div class="row">
+                        <div class="col-6 col-md-3">
+                            <img src="clothing/kids/boys clothing/jackets/jacket1.webp" class="d-block w-100 img-style" alt="Image 1">
+                        </div>
+                        <div class="col-6 col-md-3">
+                            <img src="clothing/kids/girls clothing/dresses/dress1.webp" class="d-block w-100 img-style" alt="Image 2">
+                        </div>
+                        <div class="col-6 col-md-3">
+                            <img src="clothing/kids/girls clothing/tops/top1.webp" class="d-block w-100 img-style" alt="Image 3">
+                        </div>
+                        <div class="col-6 col-md-3">
+                            <img src="clothing/kids/boys clothing/trousers/trouser1.webp" class="d-block w-100 img-style" alt="Image 4">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Custom Next/Prev Buttons Outside the Carousel -->
+            <div class="carousel-controls">
+                <button class="carousel-control-prev-custom" data-bs-target="#carouselExample" data-bs-slide="prev">
+            <i class="fas fa-chevron-left"></i>
+        </button>
+                <button class="carousel-control-next-custom" data-bs-target="#carouselExample" data-bs-slide="next">
+            <i class="fas fa-chevron-right"></i>
+        </button>
+            </div>
+        </div>
+    </div>
+    <div class="container mt-5 mb-5">
+        <img src="images/shop-by-category.webp" class="d-block w-100">
+    </div>
+    <div class="container mt-5 mb-5">
+        <div class="row">
+            <div class="col-2">
+                <div class="pt-3 w-100" style="cursor: pointer; background-color: #f41b14; margin: auto; height: 260px;" onlick="Product(['Top Wear', 'Bottom Wear'],['Casual Shirts', 'Casual Trousers'])">
+                    <img src="clothing/men/Top wear/casual shirts/shirt2.webp" class="d-block" style="height: 180px; width: 150px; margin: auto;">
+                    <p style="color: white;text-align: center; margin-top: 8px; margin-bottom: 2px; font-weight: 700; font-size: 14px;">Causal Wears</p>
+                    <p style="color: white;text-align: center; font-weight: 400; font-size: 12px;">Show Now</p>
+                </div>
+            </div>
+            <div class="col-2">
+                <div class="pt-3 w-100" style="cursor: pointer; background-color: #f41b14; margin: auto; height: 260px;" onclick="Product(['Top Wear', 'Bottom Wear'],['Formal Shirts', 'Formal Trousers'])">
+                    <img src="clothing/men/Top wear/formal shirts/shirt2.webp" class="d-block" style="height: 180px; width: 150px; margin: auto;">
+                    <p style="color: white;text-align: center; margin-top: 8px; margin-bottom: 2px; font-weight: 700; font-size: 14px;">Formal wears</p>
+                    <p style="color: white;text-align: center; font-weight: 400; font-size: 12px;">Show Now</p>
+                </div>
+            </div>
+            <div class="col-2">
+                <div class="pt-3 w-100" style="cursor: pointer; background-color: #f41b14; margin: auto; height: 260px;" onclick="Product(['Kurta' & 'Festive Wear'],['Kurta Set','Nehru Jackets','Sherwani'])">
+                    <img src="clothing/men/Kurta & festive wear/kurta set/kurta1.webp" class="d-block" style="height: 180px; width: 150px; margin: auto;">
+                    <p style="color: white;text-align: center; margin-top: 8px; margin-bottom: 2px; font-weight: 700; font-size: 14px;">Men's Ethnic Wears</p>
+                    <p style="color: white;text-align: center; font-weight: 400; font-size: 12px;">Show Now</p>
+                </div>
+            </div>
+            <div class="col-2">
+                <div class="pt-3 w-100" style="cursor: pointer; background-color: #f41b14; margin: auto; height: 260px;" onclick="Product(['Western Wear'],['Dresses','Jeans','T-shirts','Tops','Trousers'])">
+                    <img src="clothing/women/western wear/tops/\/top3.webp" class="d-block" style="height: 180px; width: 150px; margin: auto;">
+                    <p style="color: white;text-align: center; margin-top: 8px; margin-bottom: 2px; font-weight: 700; font-size: 14px;">Women Western Wears</p>
+                    <p style="color: white;text-align: center; font-weight: 400; font-size: 12px;">Show Now</p>
+                </div>
+            </div>
+            <div class="col-2">
+                <div class="pt-3 w-100" style="cursor: pointer; background-color: #f41b14; margin: auto; height: 260px;" onclick="Product(['Indian' & 'Fusion Wear'],['Jackets','Kurta' & 'Suits','Sarees','Tunics Tops'])">
+                    <img src="clothing/women/indian & fusion wear/kurtas & suits/kurta3.webp" class="d-block" style="height: 180px; width: 150px; margin: auto;">
+                    <p style="color: white;text-align: center; margin-top: 8px; margin-bottom: 2px; font-weight: 700; font-size: 14px;">Women's Ethnic Wears</p>
+                    <p style="color: white;text-align: center; font-weight: 400; font-size: 12px;">Show Now</p>
+                </div>
+            </div>
+            <div class="col-2">
+                <div class="pt-3 w-100" style="cursor: pointer; background-color: #f41b14; margin: auto; height: 260px;" onclick="Product(['Boys Clothing', 'Girls Clothing'],['Jackets','Jeans','Party Wear','Shirts','T-shirts','Trousers','Dresses','Kurta Set','Tops'])">
+                    <img src="clothing/kids/boys clothing/t-shirts/shirt2.webp" class="d-block" style="height: 180px; width: 150px; margin: auto;">
+                    <p style="color: white;text-align: center; margin-top: 8px; margin-bottom: 2px; font-weight: 700; font-size: 14px;">Kids Wears</p>
+                    <p style="color: white;text-align: center; font-weight: 400; font-size: 12px;">Show Now</p>
+                </div>
+            </div>
+
+        </div>
+        <div class="row justify-content-center py-4">
+            <div class="col-2">
+                <div class="pt-3 w-100" style="cursor: pointer; background-color: #f41b14; margin: auto; height: 260px;" onclick="Product(['Top Wear', 'Kurta' & 'Festive Wear','Bottom Wear'],['Casual Shirts','Formal Shirts','Sweat Shirts', 't-shirts','Kurta Set','Nehru Jackets','Sherwani','Casual Trousers','Formal Trousers','Jeans'])">
+                    <img src=" clothing/men/Top wear/sweat shirts/shirt4.webp " class="d-block " style="height: 180px; width: 150px; margin: auto; ">
+                    <p style="color: white;text-align: center; margin-top: 8px; margin-bottom: 2px; font-weight: 700; font-size: 14px; ">Men's Wears</p>
+                    <p style="color: white;text-align: center; font-weight: 400; font-size: 12px; ">Show Now</p>
+                </div>
+            </div>
+            <div class="col-2 ">
+                <div class="pt-3 w-100 " style="cursor: pointer; background-color: #f41b14; margin: auto; height: 260px; " onclick="Product([ 'Indian' & 'Fusion Wear', 'Western Wear'],[ 'Jackets', 'Kurta' & 'Suits', 'Sarees', 'Tunics Tops',])"></div>
+                'Dresses', 'Jeans', 'T-shirts', 'Tops', 'Trousers']) ">
+                <img src="clothing/women/indian & fusion wear/Tunics tops/top1.webp " class="d-block " style="height: 180px; width: 150px; margin: auto; ">
+                <p style="color: white;text-align: center; margin-top: 8px; margin-bottom: 2px; font-weight: 700; font-size: 14px; ">Women's Wears</p>
+                <p style="color: white;text-align: center; font-weight: 400; font-size: 12px; ">Show Now</p>
+            </div>
+        </div>
+        <div class="col-2 ">
+            <div class="pt-3 w-100 " style="cursor: pointer; background-color: #f41b14; margin: auto; height: 260px; " onclick="Product([ 'Bottom Wear'],[ 'Casual Trousers', 'Formal Trousers', 'Jeans']) ">
+                <img src="clothing/men/Bottom wear/Jeans/jeans3.webp " class="d-block " style="height: 180px; width: 150px; margin: auto; ">
+                <p style="color: white;text-align: center; margin-top: 8px; margin-bottom: 2px; font-weight: 700; font-size: 14px; ">Men's bottom Wears</p>
+                <p style="color: white;text-align: center; font-weight: 400; font-size: 12px; ">Show Now</p>
+            </div>
+        </div>
+        <div class="col-2 ">
+            <div class="pt-3 w-100 " style="cursor: pointer; background-color: #f41b14; margin: auto; height: 260px; " onclick="Product([ 'Western Wear'],[ 'Jeans,Trousers']) ">
+                <img src="clothing/women/western wear/trousers/trouser2.webp " class="d-block " style="height: 180px; width: 150px; margin: auto; ">
+                <p style="color: white;text-align: center; margin-top: 8px; margin-bottom: 2px; font-weight: 700; font-size: 14px; ">Women's bottom Wears</p>
+                <p style="color: white;text-align: center; font-weight: 400; font-size: 12px; ">Show Now</p>
+            </div>
+        </div>
+    </div>
+</div>

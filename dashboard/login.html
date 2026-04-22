@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign In</title>
+    <link href="bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        body {
+            width: 100%;
+            font-family: Assistant, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        
+        .footer {
+            background-color: #f8f9fa;
+            padding: 20px 0;
+            text-align: center;
+            margin-top: 50px;
+        }
+    </style>
+</head>
+
+<body class="bg-light">
+    <!-- Load the navbar dynamically -->
+    <div id="navbar-placeholder"></div>
+    <div id="alertContainer" style="position: absolute; top: 100px; width: 100%;"></div>
+
+
+
+    <div class="d-flex align-items-center justify-content-center bg-light" style="margin-top: 200px;">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-md-4">
+                    <div class="card shadow p-4">
+                        <h3 class="text-center mb-3">Sign In</h3>
+                        <form id="signinForm">
+                            <div class="mb-3">
+                                <label for="username" class="form-label">Username</label>
+                                <input type="text" class="form-control" id="username" placeholder="Enter your username" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="password" class="form-label">Password</label>
+                                <input type="password" class="form-control" id="password" placeholder="Enter your password" required>
+                            </div>
+                            <div class="mb-3 form-check">
+                                <input type="checkbox" class="form-check-input" id="remember">
+                                <label class="form-check-label" for="remember">Remember me</label>
+                            </div>
+                            <button type="submit" class="btn btn-primary w-100">Sign In</button>
+                            <div class="text-center">
+                                <p>Don't have an account? <a href="register.html">Register here</a>.</p>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Function to load the navbar dynamically
+        function loadNavbar() {
+            fetch("navbar.html")
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById("navbar-placeholder").innerHTML = data;
+
+                    // Find and execute script tags
+                    const scripts = document.getElementById("navbar-placeholder").getElementsByTagName("script");
+                    for (let script of scripts) {
+                        let newScript = document.createElement("script");
+                        newScript.text = script.textContent; // Copy script content
+                        document.body.appendChild(newScript); // Append and execute
+                    }
+                })
+                .catch(error => console.error("Error loading the navbar:", error));
+        }
+
+        // Call the function when the page loads
+        loadNavbar();
+    </script>
+    <script>
+        document.getElementById("signinForm").addEventListener("submit", function(event) {
+            event.preventDefault();
+            const username = document.getElementById("username").value;
+            const password = document.getElementById("password").value;
+            const data = localStorage.getItem("user");
+            const user = JSON.parse(data);
+            const alertContainer = document.getElementById("alertContainer");
+            if (!user) {
+                alertContainer.innerHTML = `
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            User Not Found
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        `;
+                return
+            }
+            let isAuthenticated = false;
+            for (let element of user) {
+                if (username === element.username && password === element.password) {
+                    localStorage.setItem("UserInfo", JSON.stringify(element));
+                    isAuthenticated = true;
+                    break;
+                }
+            }
+            if (isAuthenticated) {
+                alertContainer.innerHTML = `
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            Sign-in successful! Welcome back.
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        `;
+                setTimeout(() => {
+                    window.location.href = "dashboard.html";
+                }, 2000)
+            } else {
+                alertContainer.innerHTML = `
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            Username or Password is incorrect.
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        `;
+            }
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign In</title>
+    <link href="bootstrap.min.css" rel="stylesheet">
+    <link href="navbar.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="bag.css" rel="stylesheet">
+</head>
+
+
+<body>
+    <nav class="navbar navbar-expand-lg shadow-sm fixed-top" style="background-color: white; padding: 0px;">
+        <div class="container">
+            <!-- Logo -->
+            <a class="navbar-brand" href="#" style="padding: 0px;">
+                <img src="images/ClothLogo.png" alt="Logo" onclick="window.location.href = 'dashboard.html'">
+            </a>
+            <!-- Navbar Toggler for Mobile -->
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <!-- Navbar Links -->
+            <div>
+                <ol class="checkout-steps">
+                    <li class="step step1 active">BAG</li>
+                    <li class="divider"></li>
+                    <li class="step step2">ADDRESS</li>
+                    <li class="divider"></li>
+                    <li class="step step3">PAYMENT</li>
+                </ol>
+            </div>
+            <div>
+                <img src="images/sprite-secure.png" alt="Logo" onclick="window.location.href = 'dashboard.html'" style="height: 30px !important;"> 100%
+            </div>
+        </div>
+    </nav>
+    <div class="container mt-5" style="margin-top: 72px !important;">
+        <div class="row">
+            <div class="col-md-7 item" style="padding-top: 20px !important;">
+                <div class="d-flex justify-content-between p-4 address">
+                    <p>
+                        Deliver to:
+                    </p>
+                    <button class="btn btn-outline-primary">
+                CHANGE ADDRESS
+            </button>
+                </div>
+                <div class="d-flex justify-content-between .align-self-center p-4 mt-4 mb-4">
+                    <p class="items-selected">
+                        2/2 ITEMS SELECTED
+                    </p>
+                    <div class="d-flex justify-content-between .align-self-center">
+                        <button class="btn remove-button" onclick="showRemovePopup()">REMOVE</button>
+
+                        <div class="vr"></div>
+                        <button class="btn remove-button" onclick="showMoveToWishlistModal()">
+                            MOVE TO WISHLIST
+                        </button>
+
+                    </div>
+
+                </div>
+                <div>
+                    <div class="container mb-4" id="productContainer">
+                        <!-- Products will be inserted here dynamically -->
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-md-5">
+                <div class="d-flex justify-content-between p-4 border-bottom">
+                    <p>
+                        Apply Coupons
+                    </p>
+                    <button class="btn btn-outline-primary">
+                APPLY
+            </button>
+                </div>
+                <div class="m-4">
+                    <div>
+                        <p>PRICE DETAILS (2 Items)</p>
+                    </div>
+                    <div class="d-flex justify-content-between">
+                        <p>
+                            Total MRP
+                        </p>
+                        <p>
+                            13,297
+                        </p>
+                    </div>
+                    <div class="d-flex justify-content-between">
+                        <p>
+                            Discount on MRP
+                        </p>
+                        <p>
+                            5,931
+                        </p>
+                    </div>
+                    <div class="d-flex justify-content-between">
+                        <p>
+                            Coupon Discount
+                        </p>
+                        <p>
+                            Apply Coupon
+                        </p>
+                    </div>
+                    <div class="d-flex justify-content-between">
+                        <p>
+                            Platform Fee
+                        </p>
+                        <p>
+                            FREE
+                        </p>
+                    </div>
+                    <div class="d-flex justify-content-between border-bottom">
+                        <p>
+                            Shipping Fee
+                        </p>
+                        <p>
+                            FREE
+                        </p>
+                    </div>
+                    <div class="d-flex justify-content-between border-bottom">
+                        <p>
+                            Total Amount
+                        </p>
+                        <p>
+                            7,366
+                        </p>
+                    </div>
+                    <div>
+                        <button class="btn btn-primary w-100">
+                            PLACE ORDER
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <!-- Confirmation Modal -->
+        <div class="modal fade" id="removeConfirmModal" tabindex="-1" aria-labelledby="removeConfirmModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="removeConfirmModalLabel">Remove Selected Items</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        Are you sure you want to remove the selected items from the bag?
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                        <button type="button" class="btn btn-danger" id="confirmRemoveBtn">Remove</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Move to Wishlist Modal -->
+        <div class="modal fade" id="moveToWishlistModal" tabindex="-1" aria-labelledby="moveToWishlistLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="moveToWishlistLabel">Move to Wishlist</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        Are you sure you want to move the selected item(s) to your wishlist?
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                        <button type="button" class="btn btn-primary" id="confirmMoveToWishlist">Move</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        console.log("llllllllllllllllllllllllllllll")
+
+        function navigateToDetail(element) {
+            const parentDiv = element.parentElement;
+            const categoryHeading = parentDiv.firstElementChild.innerText;
+            const subCategory = element.innerText;
+
+            // Save the values in localStorage
+            localStorage.setItem("selectedCategory", categoryHeading);
+            localStorage.setItem("selectedSubCategory", subCategory);
+            window.location.href = "detail.html"; // Navigate to detail page
+        }
+    </script>
+    <script>
+        function generateProductCards() {
+            const productContainer = document.getElementById("productContainer");
+            const data = localStorage.getItem("UserInfo")
+            const filteredData = JSON.parse(data)
+            filteredData.addToBag.forEach(product => {
+                const card = `
+        <div class="row border my-4 me-2 p-4 position-relative">
+            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-secondary" style="width: 23px;" onclick="removeFromWishlist(${product.id})"><i class="fas fa-times"></i> <span class="visually-hidden">unread messages</span></span>
+                            <div class="col-3">
+                                <div style="position: relative;">
+    <img src="clothing/${product.image}" class="card-img-top" alt="${product.name}">
+    <input type="checkbox" class="position-absolute top-0 start-0 m-2" style="width: 20px; height: 20px;" checked>
+</div>
+
+                            </div>
+                            <div class="col-8">
+                                <div class="card-body">
+                                    <h5 class="product-name">Jack & Jeans</h5>
+                                    <p class="product-type">Henley Neck Slim Fit T-shirt</p>
+                                    <p class="product-brand">sold by:BEST UNITED INDIA COMFORTS PVT LTD</p>
+                                    <div style="display:flex; justify-content: space-between;">
+                                        <div class="container mt-3">
+                                            <div class="row">
+                                                <div class="col-md-6 d-flex align-items-center" style="padding: 0px">
+                                                    <label for="sizeSelect" class="form-label" style="font-size:13px;" >Size:</label>
+                                                    <select id="sizeSelect" class="form-select" style="width: 100px; margin-left: 15px; font-size:13px; height: 30px;">
+                                                        <option value="S">S</option>
+                                                        <option value="M">M</option>
+                                                        <option value="L">L</option>
+                                                        <option value="XL">XL</option>
+                                                        <option value="XXL">XXL</option>
+                                                    </select>
+                                                </div>
+                                                <div class="col-md-6 d-flex align-items-center">
+                                                    <label for="quantitySelect" class="form-label" style="font-size:13px;">Qty:</label>
+                                                    <select id="quantitySelect" class="form-select" style="width: 100px; margin-left: 15px; font-size:13px; height: 30px;">
+                                                        <option value="1">1</option>
+                                                        <option value="2">2</option>
+                                                        <option value="3">3</option>
+                                                        <option value="4">4</option>
+                                                        <option value="5">5</option>
+                                                        <option value="6">6</option>
+                                                        <option value="7">7</option>
+                                                        <option value="8">8</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="mt-4">
+                                        <p class="product-name">₹ 100</p>
+                                    </div>
+                                    <div>
+                                        <p style="font-size:11px"> <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M6.63639 6.99013C6.84386 7.1976 6.84386 7.53397 6.63639 7.74143L5.7725 8.60533H8.27232C9.21251 8.60533 9.97949 7.84333 9.97949 6.89824C9.97949 5.95914 9.21859 5.19824 8.27949 5.19824H6.89116C6.59776 5.19824 6.35991 4.96039 6.35991 4.66699C6.35991 4.37359 6.59776 4.13574 6.89116 4.13574H8.27949C9.80539 4.13574 11.042 5.37234 11.042 6.89824C11.042 8.43232 9.79722 9.66783 8.27241 9.66783H5.77242L6.63639 10.5318C6.84386 10.7393 6.84386 11.0756 6.63639 11.2831C6.42893 11.4906 6.09256 11.4906 5.88509 11.2831L4.11426 9.51227C4.0417 9.43971 3.99452 9.35138 3.97271 9.25831C3.96352 9.21922 3.95866 9.17846 3.95866 9.13658C3.95866 9.05996 3.97488 8.98713 4.00407 8.92134C4.02519 8.87367 4.05366 8.82847 4.08949 8.78745C4.09828 8.77738 4.10745 8.76764 4.11697 8.75826L5.88509 6.99013C6.09256 6.78267 6.42893 6.78267 6.63639 6.99013Z" fill="#282C3F"></path><path fill-rule="evenodd" clip-rule="evenodd" d="M0.416992 7.50033C0.416992 3.58831 3.58831 0.416992 7.50033 0.416992C11.4123 0.416992 14.5837 3.58831 14.5837 7.50033C14.5837 11.4123 11.4123 14.5837 7.50033 14.5837C3.58831 14.5837 0.416992 11.4123 0.416992 7.50033ZM7.50033 1.47949C4.17511 1.47949 1.47949 4.17511 1.47949 7.50033C1.47949 10.8255 4.17511 13.5212 7.50033 13.5212C10.8255 13.5212 13.5212 10.8255 13.5212 7.50033C13.5212 4.17511 10.8255 1.47949 7.50033 1.47949Z" fill="#282C3F"></path></svg> 14 days return available</p>
+                                    </div>
+                                    <div>
+                                        <p style="font-size:12px"><svg xmlns="http://www.w3.org/2000/svg" width="10" height="8" viewBox="0 0 10 8" class="itemComponents-base-checkIcon"><path fill-rule="evenodd" d="M9.775.227A.716.716 0 0 0 8.716.24L3.373 6.015a.09.09 0 0 1-.133 0L1.278 3.91a.716.716 0 0 0-1.059-.001.834.834 0 0 0 0 1.127l2.565 2.742c.14.15.33.223.53.223h.004a.71.71 0 0 0 .53-.23l5.939-6.416A.833.833 0 0 0 9.775.227"></path></svg> delivery by 18 Feb 2025</p>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+`;
+                productContainer.innerHTML += card;
+            });
+        }
+        generateProductCards();
+        window.removeFromWishlist = function(productId) {
+            let data = localStorage.getItem("user");
+            let user = JSON.parse(data);
+            let infoData = localStorage.getItem("UserInfo");
+            let UserInfoData = JSON.parse(infoData);
+
+            // Filter out the item from addToBag
+            UserInfoData.addToBag = UserInfoData.addToBag.filter(product => product.id !== productId);
+
+            // Update the main user data
+            user.forEach((ele, index) => {
+                if (ele.id == UserInfoData.id) {
+                    user[index].addToBag = user[index].addToBag.filter(product => product.id !== productId);
+                }
+            });
+
+            // Save the updated data back to localStorage
+            localStorage.setItem("user", JSON.stringify(user));
+            localStorage.setItem("UserInfo", JSON.stringify(UserInfoData));
+
+            // Clear and regenerate product cards
+            document.getElementById("productContainer").innerHTML = "";
+            generateProductCards();
+        };
+
+        function showRemovePopup() {
+            const modal = new bootstrap.Modal(document.getElementById('removeConfirmModal'));
+            modal.show();
+        }
+
+        document.getElementById("confirmRemoveBtn").addEventListener("click", function() {
+            let userData = localStorage.getItem("user");
+            let user = JSON.parse(userData);
+            let data = localStorage.getItem("UserInfo");
+            let UserInfoData = JSON.parse(data);
+
+            // Filter out only unchecked items to keep in the bag
+            UserInfoData.addToBag = UserInfoData.addToBag.filter((product, index) => {
+                const checkbox = document.querySelector(`#productContainer .row:nth-child(${index + 1}) input[type="checkbox"]`);
+                return !checkbox.checked; // Keep only unchecked items
+            });
+
+            user.forEach((ele, index) => {
+                if (ele.id == UserInfoData.id) {
+                    user[index].addToBag = user[index].addToBag.filter((product, index) => {
+                        const checkbox = document.querySelector(`#productContainer .row:nth-child(${index + 1}) input[type="checkbox"]`);
+                        return !checkbox.checked; // Keep only unchecked items
+                    });
+                }
+            });
+
+            localStorage.setItem("user", JSON.stringify(user));
+            // Update localStorage
+            localStorage.setItem("UserInfo", JSON.stringify(UserInfoData));
+
+            // Clear and regenerate product cards
+            document.getElementById("productContainer").innerHTML = "";
+            generateProductCards();
+
+            // Hide modal after removal
+            const modal = bootstrap.Modal.getInstance(document.getElementById('removeConfirmModal'));
+            modal.hide();
+        });
+
+        function showMoveToWishlistModal() {
+            // Show Bootstrap modal
+            let modal = new bootstrap.Modal(document.getElementById('moveToWishlistModal'));
+            modal.show();
+        }
+
+        document.getElementById("confirmMoveToWishlist").addEventListener("click", function() {
+            let userData = localStorage.getItem("user");
+            let user = JSON.parse(userData);
+            let data = localStorage.getItem("UserInfo");
+            let UserInfoData = JSON.parse(data);
+
+            let updatedBag = [];
+            let movedToWishlist = [];
+
+            // Loop through the bag items and move checked ones
+            UserInfoData.addToBag.forEach((product, index) => {
+                const checkbox = document.querySelector(`#productContainer .row:nth-child(${index + 1}) input[type="checkbox"]`);
+                if (checkbox && checkbox.checked) {
+                    movedToWishlist.push(product); // Move to wishlist
+                } else {
+                    updatedBag.push(product); // Keep in bag
+                }
+            });
+            debugger
+            // Update localStorage
+            UserInfoData.addToBag = updatedBag;
+            UserInfoData.wishlist = UserInfoData.wishlist ? [...UserInfoData.wishlist, ...movedToWishlist] : movedToWishlist;
+            user.forEach((ele, index) => {
+                if (ele.id == UserInfoData.id) {
+                    user[index].addToBag = UserInfoData.addToBag
+                    user[index].wishlist = UserInfoData.wishlist
+                }
+            });
+            localStorage.setItem("UserInfo", JSON.stringify(UserInfoData));
+
+            // Refresh UI
+            document.getElementById("productContainer").innerHTML = "";
+            generateProductCards();
+
+            // Hide modal
+            let modal = bootstrap.Modal.getInstance(document.getElementById('moveToWishlistModal'));
+            modal.hide();
+        });
+    </script>
+    <script>
+    </script>
+
+</body>
+
+</html>

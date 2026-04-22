@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign In</title>
+    <link href="bootstrap.min.css" rel="stylesheet">
+    <link href="navbar.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+
+<body class="bg-light">
+    <nav class="navbar navbar-expand-lg shadow-sm fixed-top" style="background-color: white; padding: 0px;">
+        <div class="container">
+            <!-- Logo -->
+            <a class="navbar-brand" href="#" style="padding: 0px;">
+                <img src="images/ClothLogo.png" alt="Logo" onclick="window.location.href = 'dashboard.html'">
+            </a>
+            <!-- Navbar Toggler for Mobile -->
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <!-- Navbar Links -->
+            <div class="collapse navbar-collapse ms-3" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item dropdown mx-2 position-realtive">
+                        <a class="nav-link" href="#">
+                            MEN
+                        </a>
+                        <ul class="dropdown-menu" id="men" aria-labelledby="menDropdown">
+                            <div class="container">
+                                <div class="row">
+                                    <!-- Top Wear Column -->
+                                    <div class="col-md-4 ps-4 border-end">
+                                        <h5 class="category-heading">Top Wear</h5>
+                                        <div class="category-content" onclick="navigateToDetail(this)">Casual Shirts</div>
+                                        <div class="category-content" onclick="navigateToDetail(this)">Formal Shirts</div>
+                                        <div class="category-content" onclick="navigateToDetail(this)">Sweat Shirts</div>
+                                        <div class="category-content" onclick="navigateToDetail(this)">T-shirts</div>
+                                    </div>
+
+                                    <!-- Kurta & Festive Wear Column -->
+                                    <div class="col-md-4 ps-4 border-end">
+                                        <h5 class="category-heading">Kurta & Festive Wear</h5>
+                                        <div class="category-content" onclick="navigateToDetail(this)">Kurta Set</div>
+                                        <div class="category-content" onclick="navigateToDetail(this)">Nehru Jackets</div>
+                                        <div class="category-content" onclick="navigateToDetail(this)">Sherwani</div>
+                                    </div>
+
+                                    <!-- Bottom Wear Column -->
+                                    <div class="col-md-4 ps-4">
+                                        <h5 class="category-heading">Bottom Wear</h5>
+                                        <div class="category-content" onclick="navigateToDetail(this)">Casual Trousers</div>
+                                        <div class="category-content" onclick="navigateToDetail(this)">Formal Trousers</div>
+                                        <div class="category-content" onclick="navigateToDetail(this)">Jeans</div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown mx-2 position-realtive">
+                        <a class="nav-link" href="#">
+                            WOMEN
+                        </a>
+                        <ul class="dropdown-menu" id="women" aria-labelledby="womenDropdown">
+                            <div class="container">
+                                <div class="row">
+                                    <!-- Top Wear Column -->
+                                    <div class="col-md-6 ps-4 border-end">
+                                        <h5 class="category-heading">Indian & Fusion Wear</h5>
+                                        <div class="category-content" onclick="navigateToDetail(this)">Jackets</div>
+                                        <div class="category-content" onclick="navigateToDetail(this)">Kurta & Suits</div>
+                                        <div class="category-content" onclick="navigateToDetail(this)">Sarees</div>
+                                        <div class="category-content" onclick="navigateToDetail(this)">Tunics Tops</div>
+                                    </div>
+
+                                    <!-- Kurta & Festive Wear Column -->
+                                    <div class="col-md-6 ps-4">
+                                        <h5 class="category-heading">Western Wear</h5>
+                                        <div class="category-content" onclick="navigateToDetail(this)">Dresses</div>
+                                        <div class="category-content" onclick="navigateToDetail(this)">Jeans</div>
+                                        <div class="category-content" onclick="navigateToDetail(this)">T-shirts</div>
+                                        <div class="category-content" onclick="navigateToDetail(this)">Tops</div>
+                                        <div class="category-content" onclick="navigateToDetail(this)">Trousers</div>
+
+                                    </div>
+
+                                    <!-- Bottom Wear Column -->
+
+                                </div>
+                            </div>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown mx-2 position-realtive">
+                        <a class="nav-link" href="#">
+                            KIDS
+                        </a>
+                        <ul class="dropdown-menu" id="kids" aria-labelledby="kidsDropdown">
+                            <div class="container">
+                                <div class="row">
+                                    <!-- Top Wear Column -->
+                                    <div class="col-md-6 ps-4 border-end">
+                                        <h5 class="category-heading">Boys Clothing</h5>
+                                        <div class="category-content" onclick="navigateToDetail(this)">Jackets</div>
+                                        <div class="category-content" onclick="navigateToDetail(this)">Jeans</div>
+                                        <div class="category-content" onclick="navigateToDetail(this)">Party Wear</div>
+                                        <div class="category-content" onclick="navigateToDetail(this)">Shirts</div>
+                                        <div class="category-content" onclick="navigateToDetail(this)">T-shirts</div>
+                                        <div class="category-content" onclick="navigateToDetail(this)">Trousers</div>
+
+                                    </div>
+
+                                    <!-- Kurta & Festive Wear Column -->
+                                    <div class="col-md-6 ps-4">
+                                        <h5 class="category-heading">Girls Clothing</h5>
+                                        <div class="category-content" onclick="navigateToDetail(this)">Dresses</div>
+                                        <div class="category-content" onclick="navigateToDetail(this)">Kurta Set</div>
+                                        <div class="category-content" onclick="navigateToDetail(this)">Tops</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </ul>
+                    </li>
+                </ul>
+
+                <!-- User Dropdown -->
+
+                <div class="dropdown user-dropdown me-4">
+                    <a class="nav-link icon-link nav-item" style="padding-top: 25px; height: 100px;">
+                        <i class="fa-regular fa-user" style="font-size: 18px; color: gray;"></i>
+                        <span class="icon-text">User</span>
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="userDropdown">
+                        <li><a class="dropdown-item" href="#" onclick="window.location.href = 'editProfile.html'">Profile</a></li>
+                        <li><a class="dropdown-item" href="#">Settings</a></li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li><a class="dropdown-item" href="#" onclick="logout();">Logout</a></li>
+                        <!-- LogIn (Shown when logged out) -->
+                        <li><a class="dropdown-item login-item" href="login.html" style="display: none;">LogIn</a></li>
+                    </ul>
+                </div>
+                <div class="icon-container me-4" style="padding-top: 25px; height: 100px;">
+                    <a href="#" class="icon-link" onclick="window.location.href = 'wishlist1.html'">
+                        <i class="fa-regular fa-heart" style="font-size: 18px; color: gray;"></i>
+                        <span class="icon-text">Wishlist</span>
+                    </a>
+                </div>
+
+                <!-- Bag -->
+                <div class="icon-container me-4" style="padding-top: 25px; height: 100px;">
+                    <a href="#" class="icon-link" onclick="window.location.href = 'bag.html'">
+                        <i class="fa-solid fa-bag-shopping" style="font-size: 18px; color: gray;"></i>
+                        <span class="icon-text">Bag</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        console.log("llllllllllllllllllllllllllllll")
+
+        function navigateToDetail(element) {
+            const parentDiv = element.parentElement;
+            const categoryHeading = parentDiv.firstElementChild.innerText;
+            const subCategory = element.innerText;
+
+            // Save the values in localStorage
+            localStorage.setItem("selectedCategory", categoryHeading);
+            localStorage.setItem("selectedSubCategory", subCategory);
+            window.location.href = "detail.html"; // Navigate to detail page
+        }
+    </script>
+    <script>
+        function logout() {
+            // Clear user-related data from localStorage
+            localStorage.clear();
+
+            // Hide Profile, Settings, and Logout items
+            document.querySelectorAll('.user-dropdown .dropdown-item').forEach(item => {
+                if (item.innerText === "Profile" || item.innerText === "Settings" || item.innerText === "Logout") {
+                    item.style.display = 'none';
+                }
+            });
+
+            // Show the "LogIn" item
+            document.querySelector('.user-dropdown .login-item').style.display = 'block';
+
+            document.querySelector('.dropdown-divider').style.display = 'none';
+
+            // Optionally redirect to the login page
+            window.location.href = "dashboard.html";
+        }
+
+
+        const userInfo = localStorage.getItem("UserInfo");
+        if (userInfo) {
+            // Show Profile, Settings, and Logout items
+            document.querySelectorAll('.user-dropdown .dropdown-item').forEach(item => {
+                if (item.innerText === "Profile" || item.innerText === "Settings" || item.innerText === "Logout") {
+                    item.style.display = 'block';
+                }
+            });
+
+            // Hide the "LogIn" item
+            document.querySelector('.user-dropdown .login-item').style.display = 'none';
+            document.querySelector('.dropdown-divider').style.display = 'block';
+        } else {
+            // Hide Profile, Settings, and Logout items
+            document.querySelectorAll('.user-dropdown .dropdown-item').forEach(item => {
+                if (item.innerText === "Profile" || item.innerText === "Settings" || item.innerText === "Logout") {
+                    item.style.display = 'none';
+                }
+            });
+
+            // Show the "LogIn" item
+            document.querySelector('.user-dropdown .login-item').style.display = 'block';
+            document.querySelector('.dropdown-divider').style.display = 'none';
+        }
+    </script>
+
+</body>
+
+</html>

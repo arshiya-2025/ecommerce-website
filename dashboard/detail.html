@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom CSS for styling -->
+    <link href="detail.css" rel="stylesheet">
+</head>
+
+<body>
+    <!-- Header -->
+    <div id="navbar-placeholder"></div>
+
+
+    <!-- Main Content -->
+    <div class="container mt-5">
+        <h1>Welcome to the Dashboard</h1>
+        <p>This is your dashboard page. You can add more content here.</p>
+        <div class="row" id="productContainer">
+            <!-- Products will be inserted here dynamically -->
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p class="mb-0">&copy; 2023 Your Company. All rights reserved.</p>
+            <p class="mb-0"><a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a></p>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS (Required for dropdowns) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Function to load the navbar dynamically
+        function loadNavbar() {
+            fetch("navbar.html")
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById("navbar-placeholder").innerHTML = data;
+
+                    // Find and execute script tags
+                    const scripts = document.getElementById("navbar-placeholder").getElementsByTagName("script");
+                    for (let script of scripts) {
+                        let newScript = document.createElement("script");
+                        newScript.text = script.textContent; // Copy script content
+                        document.body.appendChild(newScript); // Append and execute
+                    }
+                })
+                .catch(error => console.error("Error loading the navbar:", error));
+        }
+
+        // Call the function when the page loads
+        loadNavbar();
+    </script>
+    <script type="module">
+        import { getUserInfo, addUserInfo, updateWishlist, deleteUserInfo } from './user.js'; import data from "./data.js"; const selectedCategory = localStorage.getItem("selectedCategory"); const selectedSubCategory = localStorage.getItem("selectedSubCategory");
+        function generateProductCards() { const productContainer = document.getElementById("productContainer"); const filteredData = selectedCategory ? data.filter(product=> product.type.toLowerCase() === selectedCategory.toLowerCase() && product.subCategory.toLowerCase()
+        === selectedSubCategory.toLowerCase()) : data; filteredData.forEach(product => { const card = `
+        <div class="col-md-3">
+            <div class="card shadow-sm mb-4">
+                <img src="clothing/${product.image}" onclick="saveProductAndNavigate(${product.id})" class="card-img-top" alt="${product.name}">
+                <div class="card-body">
+                    <h5 class="product-name">${product.name}</h5>
+                    <p class="product-type">${product.type}</p>
+                    <div style="display:flex; justify-content: space-between;">
+                        <p class="product-price">Rs ₹${product.price.toLocaleString()}</p>
+                        <p><i class="fa-regular fa-heart heart-icon" onclick="toggleHeart(event,${product.id})"></i></p>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+        `; productContainer.innerHTML += card; }); } window.saveProductAndNavigate = function(productId) { const product = data.find(p => p.id === productId); if (product) { localStorage.setItem("selectedProduct", JSON.stringify(product)); window.location.href
+        = "productDetail.html"; } }; document.addEventListener("DOMContentLoaded", generateProductCards); window.toggleHeart = function(event, id) { const UserInfo = localStorage.getItem("UserInfo");const heartIcon = event.target; const UserInfoData =
+        UserInfo ? JSON.parse(UserInfo) : []; if(!UserInfo){ window.location.href = "login.html"; } const product = data.find(p => p.id === id); if(!UserInfoData.wishList.includes(product)){ UserInfoData.wishList.push(product); } localStorage.setItem("UserInfo",JSON.stringify(UserInfoData));
+        if (heartIcon.classList.contains("clicked")) { heartIcon.classList.remove("clicked"); heartIcon.classList.replace("fas", "fa-regular"); } else { heartIcon.classList.add("clicked"); heartIcon.classList.replace("fa-regular", "fas"); heartIcon.style.color
+        = "red"; console.log("lllllll",getUserInfo()); setTimeout(() => heartIcon.classList.remove("clicked"),1000) } }
+
+    </script>
+</body>
+
+</html>
